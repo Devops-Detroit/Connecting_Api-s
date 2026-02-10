@@ -4,7 +4,7 @@ import requests
 import json
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5000"]) 
+#CORS(app, origins=["http://localhost:5000"]) 
 
 
 @app.route('/')
@@ -23,7 +23,7 @@ def view_task():
     get_request = requests.get("https://jfmyiqt6rb.execute-api.us-east-1.amazonaws.com/Get-Task")
     Json_obj = json.loads(get_request.text)
     print(type(Json_obj))
-    FIlter_task_dictionary =  [dictionary for dictionary in Json_obj if dictionary['task_description'] != '']
+    FIlter_task_dictionary =  [dictionary for dictionary in Json_obj if dictionary['task_description'] != ''] ##Remove empty tasks
     tasks =  [dictionary['task_description'] for dictionary in FIlter_task_dictionary]
     # Example structure: {"tasks": ["Buy milk", "Call mom"]}
     
@@ -31,4 +31,4 @@ def view_task():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+     app.run(host='0.0.0.0', port=5000, debug=False)
