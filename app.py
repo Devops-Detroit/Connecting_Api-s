@@ -4,7 +4,7 @@ import requests
 import json
 
 app = Flask(__name__)
-#CORS(app, origins=["http://localhost:5000"]) 
+CORS(app, origins=["*"])  # This allows all origins
 
 
 @app.route('/')
